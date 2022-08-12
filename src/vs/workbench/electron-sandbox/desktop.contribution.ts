@@ -26,7 +26,6 @@ import { IConfigurationService } from 'vs/platform/configuration/common/configur
 import { ShutdownReason } from 'vs/workbench/services/lifecycle/common/lifecycle';
 import { NativeWindow } from 'vs/workbench/electron-sandbox/window';
 import { ModifierKeyEmitter } from 'vs/base/browser/dom';
-import product from 'vs/platform/product/common/product';
 
 // Actions
 (function registerActions(): void {
@@ -242,7 +241,7 @@ import product from 'vs/platform/product/common/product';
 			'window.experimental.useSandbox': { // TODO@bpasero remove me once sandbox is final
 				type: 'boolean',
 				description: localize('experimentalUseSandbox', "Experimental: When enabled, the window will have sandbox mode enabled via Electron API."),
-				default: typeof product.quality === 'string' && product.quality !== 'stable', // disabled by default in stable for now
+				default: false,
 				'scope': ConfigurationScope.APPLICATION,
 				ignoreSync: true
 			},
