@@ -370,6 +370,8 @@ function tweakProductForServerWeb(product) {
 		})
 	));
 
+	exports[`optimizeVSCode${type === 'reh' ? 'Reh' : 'RehWeb'}Task`] = optimizeTask;
+
 	const minifyTask = task.define(`minify-vscode-${type}`, task.series(
 		optimizeTask,
 		util.rimraf(`out-vscode-${type}-min`),
