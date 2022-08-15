@@ -8,6 +8,13 @@ if (Test-Path variable:global:__VSCodeOriginalPrompt) {
 	return;
 }
 
+# [Console]::Write() and $host.UI.Write() are only supported in FullLanguage.
+# In RestrictedMode the if-condition will throw, but try/catch is not supported in that mode, so we can't display warning.
+if ($ExecutionContext.SessionState.LanguageMode -ne [System.Management.Automation.PSLanguageMode]::FullLanguage) {
+    Write-Warning "Shell integration is only supported in FullLanguage mode. See 'Get-Help about_Language_Modes'. Consider disabling with setting '`"terminal.integrated.shellIntegration.enabled`": `"false`"'"
+    return;
+}
+
 $Global:__VSCodeOriginalPrompt = $function:Prompt
 
 $Global:__LastHistoryId = -1
